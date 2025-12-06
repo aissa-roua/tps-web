@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Tâches - To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tasks"></i> Gestionnaire de Tâches</h1>
+            <p class="subtitle">Organisez votre travail efficacement</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <input type="text" id="taskInput" placeholder="Saisissez une nouvelle tâche..." autofocus>
+                <button id="addTaskBtn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Ajouter
+                </button>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalTasks">0</div>
+                    <div class="stat-label">Tâches totales</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="completedTasks">0</div>
+                    <div class="stat-label">Terminées</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="pendingTasks">0</div>
+                    <div class="stat-label">En cours</div>
+                </div>
+            </div>
+            
+            <div class="search-section">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Rechercher une tâche...">
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="clearAllBtn" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Tout supprimer
+                </button>
+                <button id="clearCompletedBtn" class="btn btn-secondary">
+                    <i class="fas fa-check-double"></i> Supprimer terminées
+                </button>
+            </div>
+            
+            <div class="task-list-container">
+                <ul id="taskList" class="task-list">
+                    <!-- Les tâches seront ajoutées ici dynamiquement -->
+                    <div class="empty-state" id="emptyState">
+                        <i class="fas fa-clipboard-list fa-3x"></i>
+                        <h3>Aucune tâche pour le moment</h3>
+                        <p>Commencez par ajouter une nouvelle tâche ci-dessus.</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>TP JavaScript - Application de Gestion de Tâches</p>
+            <p class="footer-info">FST - Département Informatique</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

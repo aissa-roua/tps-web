@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP JavaScript Avancé</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-code"></i> TP JavaScript Avancé</h1>
+            <p class="subtitle">Exercices ES6+, Classes, Asynchronisme et API</p>
+        </header>
+        
+        <main>
+            <section class="partie" id="partie1">
+                <h2><i class="fas fa-code-branch"></i> Partie 1 - Syntaxe Moderne ES6+</h2>
+                
+                <div class="exercice">
+                    <h3>Exercice 1 - Variables et portée</h3>
+                    <button onclick="demoVariables()">Tester les variables</button>
+                    <div id="ex1-result"></div>
+                </div>
+                
+                <div class="exercice">
+                    <h3>Exercice 2 - Fonctions fléchées</h3>
+                    <div class="input-group">
+                        <input type="number" id="num1" placeholder="Nombre 1" value="5">
+                        <input type="number" id="num2" placeholder="Nombre 2" value="3">
+                        <button onclick="calculerSommes()">Calculer les sommes</button>
+                    </div>
+                    <div id="ex2-result"></div>
+                </div>
+                
+                <div class="exercice">
+                    <h3>Exercice 3 - Destructuring</h3>
+                    <button onclick="demoDestructuring()">Voir le destructuring</button>
+                    <div id="ex3-result"></div>
+                </div>
+                
+                <div class="exercice">
+                    <h3>Exercice 4 - Spread Operator</h3>
+                    <button onclick="demoSpread()">Tester le spread operator</button>
+                    <div id="ex4-result"></div>
+                </div>
+            </section>
+            
+            <section class="partie" id="partie2">
+                <h2><i class="fas fa-object-group"></i> Partie 2 - Objets, Classes, Tableaux</h2>
+                
+                <div class="exercice">
+                    <h3>Exercice 5 - Objet Livre</h3>
+                    <button onclick="demoLivre()">Afficher les livres</button>
+                    <div id="ex5-result"></div>
+                </div>
+                
+                <div class="exercice">
+                    <h3>Exercice 6 - Classe Étudiant</h3>
+                    <button onclick="demoEtudiants()">Afficher les étudiants</button>
+                    <div id="ex6-result"></div>
+                </div>
+                
+                <div class="exercice">
+                    <h3>Exercice 7 - Tableaux avancés</h3>
+                    <button onclick="demoTableaux()">Analyser les notes</button>
+                    <div id="ex7-result"></div>
+                </div>
+            </section>
+            
+            <section class="partie" id="partie3">
+                <h2><i class="fas fa-sync-alt"></i> Partie 3 - Asynchronisme et API</h2>
+                
+                <div class="exercice">
+                    <h3>Exercice 8 - Promesse simple</h3>
+                    <button onclick="demoTelechargement()">Simuler téléchargement</button>
+                    <div id="ex8-result"></div>
+                </div>
+                
+                <div class="exercice">
+                    <h3>Exercice 9 - Fetch API</h3>
+                    <div id="posts-container">
+                        <p>Les posts seront chargés ici...</p>
+                    </div>
+                    <button onclick="afficherPostsDansDOM()">
+                        <i class="fas fa-redo"></i> Recharger les posts
+                    </button>
+                </div>
+            </section>
+            
+            <section class="partie" id="partie4">
+                <h2><i class="fas fa-trophy"></i> Partie 4 - Challenge Final</h2>
+                
+                <div class="exercice">
+                    <h3>Mini-projet: Gestionnaire d'étudiants</h3>
+                    <div class="mini-projet">
+                        <div class="form-group">
+                            <input type="text" id="etudiant-nom" placeholder="Nom de l'étudiant">
+                            <input type="number" id="etudiant-note" placeholder="Note (0-20)" min="0" max="20">
+                            <button onclick="ajouterEtudiant()">
+                                <i class="fas fa-plus"></i> Ajouter
+                            </button>
+                        </div>
+                        
+                        <div class="stats">
+                            <h4>Statistiques</h4>
+                            <div id="stats-container">
+                                <p>Aucun étudiant ajouté</p>
+                            </div>
+                        </div>
+                        
+                        <div class="liste-etudiants">
+                            <h4>Liste des étudiants</h4>
+                            <table id="table-etudiants">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Note</th>
+                                        <th>Mention</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="etudiants-body">
+                                    <!-- Rempli dynamiquement -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>TP JavaScript Avancé - Réalisé avec ES6+</p>
+            <p>Consultez la console pour voir les résultats détaillés</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
