@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Catalogue de Livres</h1>
+  
+  <div class="content">
+    <div class="form-section">
+      <app-book-form 
+        [categories]="categories"
+        [selectedBook]="selectedBook"
+        (addBook)="onAddBook($event)"
+        (cancelEdit)="onCancelEdit()">
+      </app-book-form>
+    </div>
+
+    <div class="list-section">
+      <app-book-list 
+        [books]="books"
+        [categories]="categories"
+        (editBook)="onEditBook($event)"
+        (deleteBook)="onDeleteBook($event)">
+      </app-book-list>
+    </div>
+  </div>
+</div>

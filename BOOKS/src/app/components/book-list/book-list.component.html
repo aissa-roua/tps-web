@@ -1,0 +1,117 @@
+<div class="book-list-container">
+  <h2>Liste des Livres</h2>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-item">
+      <span class="stat-label">Total:</span>
+      <span class="stat-value">{{ books.length }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Disponibles:</span>
+      <span class="stat-value available">{{ getAvailableCount() }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Indisponibles:</span>
+      <span class="stat-value unavailable">{{ getUnavailableCount() }}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Stock Total:</span>
+      <span class="stat-value">{{ getTotalStock() }}</span>
+    </div>
+  </div>
+
+  <!-- Recherche et Filtres -->
+  <div class="filters">
+    <div class="filter-group">
+      <label for="search">Rechercher:</label>
+      <input
+        type="text"
+        id="search"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange()"
+        placeholder="Titre ou auteur..."
+        class="search-input"
+      />
+    </div>
+
+    <div class="filter-group">
+      <label for="categoryFilter">Catégorie:</label>
+      <select
+        id="categoryFilter"
+        [(ngModel)]="filterCategory"
+        (change)="onFilterChange()"
+      >
+        <option value="">Toutes</option>
+        @for (cat of categories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="availabilityFilter">Disponibilité:</label>
+      <select
+        id="availabilityFilter"
+        [(ngModel)]="filterAvailability"
+        (change)="onFilterChange()"
+      >
+        <option value="">Tous</option>
+        <option value="true">Disponibles</option>
+        <option value="false">Indisponibles</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="sortBy">Trier par:</label>
+      <select id="sortBy" [(ngModel)]="sortBy" (change)="onSortChange()">
+        <option value="title">Titre</option>
+        <option value="category">Catégorie</option>
+        <option value="availability">Disponibilité</option>
+      </select>
+    </div>
+
+    <button class="btn-reset" (click)="resetFilters()">Réinitialiser</button>
+  </div>
+
+  <!-- Table des livres -->
+  @if (filteredBooks.length > 0) {
+    <div class="table-container">
+      <table class="books-table">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Catégorie</th>
+            <th>Disponibilité</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (book of filteredBooks; track book.id) {
+            <tr [class.unavailable]="!book.isAvailable">
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.category }}</td>
+              <td>
+                <span [class.available]="book.isAvailable" [class.unavailable]="!book.isAvailable">
+                  {{ book.isAvailable ? 'Disponible' : 'Indisponible' }}
+                </span>
+              </td>
+              <td>{{ book.stock || 0 }}</td>
+              <td class="actions">
+                <button class="btn-edit" (click)="onEdit(book)">Modifier</button>
+                <button class="btn-delete" (click)="onDelete(book.id)">Supprimer</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="no-results">
+      <p>Aucun livre trouvé</p>
+    </div>
+  }
+</div>

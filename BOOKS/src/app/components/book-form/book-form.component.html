@@ -1,0 +1,204 @@
+<form #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm)" class="book-form">
+  <h2>{{ isEditMode ? 'Modifier le Livre' : 'Ajouter un Livre' }}</h2>
+
+  <!-- Title -->
+  <div class="form-group">
+    <label for="title">Titre *</label>
+    <input
+      type="text"
+      id="title"
+      name="title"
+      [(ngModel)]="book.title"
+      required
+      minlength="3"
+      #title="ngModel"
+      [class.error]="title.invalid && title.dirty"
+    />
+    @if (title.invalid && title.dirty) {
+      <div class="error-message">
+        @if (title.errors?.['required']) {
+          <span>Le titre est requis</span>
+        }
+        @if (title.errors?.['minlength']) {
+          <span>Le titre doit contenir au moins 3 caractères</span>
+        }
+      </div>
+    }
+    @if (isTitleNumberOnly() && title.dirty) {
+      <div class="error-message">
+        <span>Le titre ne peut pas être composé uniquement de chiffres</span>
+      </div>
+    }
+  </div>
+
+  <!-- Author -->
+  <div class="form-group">
+    <label for="author">Auteur *</label>
+    <input
+      type="text"
+      id="author"
+      name="author"
+      [(ngModel)]="book.author"
+      required
+      minlength="3"
+      #author="ngModel"
+      [class.error]="author.invalid && author.dirty"
+    />
+    @if (author.invalid && author.dirty) {
+      <div class="error-message">
+        @if (author.errors?.['required']) {
+          <span>L'auteur est requis</span>
+        }
+        @if (author.errors?.['minlength']) {
+          <span>L'auteur doit contenir au moins 3 caractères</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Publisher Email -->
+  <div class="form-group">
+    <label for="email">Email Éditeur *</label>
+    <input
+      type="email"
+      id="email"
+      name="publisherEmail"
+      [(ngModel)]="book.publisherEmail"
+      required
+      email
+      #email="ngModel"
+      [class.error]="email.invalid && email.dirty"
+    />
+    @if (email.invalid && email.dirty) {
+      <div class="error-message">
+        @if (email.errors?.['required']) {
+          <span>L'email est requis</span>
+        }
+        @if (email.errors?.['email']) {
+          <span>L'email n'est pas valide</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Publisher Phone -->
+  <div class="form-group">
+    <label for="phone">Téléphone Éditeur</label>
+    <input
+      type="text"
+      id="phone"
+      name="publisherPhone"
+      [(ngModel)]="book.publisherPhone"
+      pattern="^[0-9]{8}$"
+      #phone="ngModel"
+      [class.error]="phone.invalid && phone.dirty"
+      placeholder="8 chiffres"
+    />
+    @if (phone.invalid && phone.dirty) {
+      <div class="error-message">
+        @if (phone.errors?.['pattern']) {
+          <span>Le téléphone doit contenir 8 chiffres</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Release Date -->
+  <div class="form-group">
+    <label for="releaseDate">Date de Publication *</label>
+    <input
+      type="date"
+      id="releaseDate"
+      name="releaseDate"
+      [(ngModel)]="book.releaseDate"
+      required
+      #releaseDate="ngModel"
+      [class.error]="(releaseDate.invalid || !isValidYear()) && releaseDate.dirty"
+    />
+    @if (releaseDate.invalid && releaseDate.dirty) {
+      <div class="error-message">
+        @if (releaseDate.errors?.['required']) {
+          <span>La date est requise</span>
+        }
+      </div>
+    }
+    @if (!isValidYear() && releaseDate.dirty) {
+      <div class="error-message">
+        <span>L'année doit être supérieure à 1900</span>
+      </div>
+    }
+  </div>
+
+  <!-- Category -->
+  <div class="form-group">
+    <label for="category">Catégorie *</label>
+    <select
+      id="category"
+      name="category"
+      [(ngModel)]="book.category"
+      required
+      #category="ngModel"
+      [class.error]="category.invalid && category.dirty"
+    >
+      <option value="">-- Sélectionner une catégorie --</option>
+      @for (cat of categories; track cat) {
+        <option [value]="cat">{{ cat }}</option>
+      }
+    </select>
+    @if (category.invalid && category.dirty) {
+      <div class="error-message">
+        <span>Veuillez sélectionner une catégorie</span>
+      </div>
+    }
+  </div>
+
+  <!-- Stock (optional) -->
+  <div class="form-group">
+    <label for="stock">Stock (optionnel)</label>
+    <input
+      type="number"
+      id="stock"
+      name="stock"
+      [(ngModel)]="book.stock"
+      min="0"
+      #stock="ngModel"
+      [class.error]="stock.invalid && stock.dirty"
+    />
+    @if (stock.invalid && stock.dirty) {
+      <div class="error-message">
+        @if (stock.errors?.['min']) {
+          <span>Le stock doit être >= 0</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Is Available -->
+  <div class="form-group checkbox">
+    <label for="isAvailable">
+      <input
+        type="checkbox"
+        id="isAvailable"
+        name="isAvailable"
+        [(ngModel)]="book.isAvailable"
+      />
+      Disponible
+    </label>
+  </div>
+
+  <!-- Buttons -->
+  <div class="form-actions">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="isTitleNumberOnly()"
+    >
+      {{ isEditMode ? 'Mettre à jour' : 'Ajouter' }}
+    </button>
+    @if (isEditMode) {
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">
+        Annuler
+      </button>
+    }
+  </div>
+</form>
